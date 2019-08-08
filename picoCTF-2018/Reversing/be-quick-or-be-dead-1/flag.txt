@@ -1,0 +1,13 @@
+picoCTF{why_bother_doing_unnecessary_computation_402ca676}
+
+Patched:
+[0x004005a0]> oo+
+[0x004005a0]> s 0x0040074a
+[0x0040074a]> pd 1
+            0x0040074a      c745f4010000.  mov dword [rbp - 0xc], 1
+[0x0040074a]> w
+wf        wF        wp        wta       wtf       wxf       whereis   which     wt        wa        waf                                                                       
+wao       wv        wv1       wv2       wv4       wv8       wx        ww        w?                                                                                            
+[0x0040074a]> wa mov dword [rbp - 0xc], 8
+Written 7 byte(s) (mov dword [rbp - 0xc], 8) = wx c745f408000000
+[0x0040074a]> q

@@ -1,0 +1,55 @@
+// Decompiled by Jad v1.5.8e. Copyright 2001 Pavel Kouznetsov.
+// Jad home page: http://www.geocities.com/kpdus/jad.html
+// Decompiler options: packimports(3) 
+// Source File Name:   CoffeeTime.java
+
+package coffeetime;
+
+import java.io.IOException;
+import java.io.PrintStream;
+import java.math.BigInteger;
+import java.util.Random;
+import org.jline.reader.LineReader;
+import org.jline.reader.LineReaderBuilder;
+import org.jline.terminal.TerminalBuilder;
+
+public class CoffeeTime
+{
+
+    public static void main(String args[])
+        throws Exception
+    {
+        new CoffeeTime();
+    }
+
+    public CoffeeTime()
+        throws IOException, InterruptedException
+    {
+        LineReader lineReader = LineReaderBuilder.builder().terminal(TerminalBuilder.terminal()).build();
+        String line = lineReader.readLine("Can you give me some time to calculate a number? [y/n]\n");
+        if(line.equals("y"))
+        {
+            Random random = new Random();
+            BigInteger bigInteger = new BigInteger(2000, random);
+            long timestart = System.currentTimeMillis();
+            BigInteger result = bigInteger.pow(10000);
+            long timeend = System.currentTimeMillis();
+            int secs = (int)((double)(timeend - timestart) / 5D);
+            System.out.println((new StringBuilder()).append("\nWhat is ").append(bigInteger).append(" to the power of 10000?").toString());
+            System.out.println((new StringBuilder()).append("You have ").append((double)secs / 1000D).append(" seconds to answer.").toString());
+            Thread.sleep(secs);
+            line = lineReader.readLine();
+            System.out.println("\nPlease wait.");
+            if(line.equals(result.toString()))
+            {
+                if(System.currentTimeMillis() > timeend + (long)secs)
+                    System.out.println("Uh-oh, time's out.");
+                else
+                    System.out.println("peaCTF{nice_cup_of_coffee}");
+            } else
+            {
+                System.out.println("Wrong answer, unfortunately.");
+            }
+        }
+    }
+}
